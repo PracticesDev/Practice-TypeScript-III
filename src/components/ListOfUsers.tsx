@@ -1,7 +1,9 @@
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../hooks/UseStore";
+import { useUsers } from "../hooks/useUsers";
 
 export default function ListOfUsers() {
-	const users = useSelector((state) => state.users);
+	const users = useAppSelector((state) => state.users);
+	const { handleRemoveUser } = useUsers();
 
 	return (
 		<>
@@ -30,7 +32,11 @@ export default function ListOfUsers() {
 							<td>{item.lastname}</td>
 							<td>{item.email}</td>
 							<td>
-								<button type="button" className="btn btn-outline-danger">
+								<button
+									onClick={() => handleRemoveUser(item.id)}
+									type="button"
+									className="btn btn-outline-danger"
+								>
 									Delete
 								</button>
 								<button type="button" className="btn btn-outline-success">
